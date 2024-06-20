@@ -1,4 +1,4 @@
-FROM docker:24.0.7-dind-alpine3.19
+FROM docker:24.0.7-alpine3.19
 LABEL vendor="cedrickoka/kolla-ansible" maintainer="okacedrick@gmail.com" version="1.0.0"
 
 SHELL ["/bin/sh", "-xo", "pipefail", "-c"]
@@ -23,9 +23,10 @@ RUN apk add --no-cache --update \
         python3-dev=3.11.9-r0 \
         py3-pip=23.3.1-r0
 
-RUN pip3 install --no-cache-dir -U \
+RUN pip3 install --no-cache-dir -U --break-system-packages \
         pip==24.0 \
         diskimage-builder==3.33.0 \
+        docker==7.1.0 \
         kolla==18.0.0 \
         kolla-ansible==18.0.0 \
         python-openstackclient==6.6.0 && \
